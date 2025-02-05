@@ -1,3 +1,34 @@
+// NOTE: Ideally we'd pull in Deno types from https://github.com/denoland/deno/blob/main/cli/tsc/dts/lib.deno.ns.d.ts but haven't found a good way.
+export var fs;
+(function (fs) {
+    fs.writeFile = Deno.writeFile;
+    fs.writeTextFile = Deno.writeTextFile;
+    fs.readTextFile = Deno.readTextFile;
+    fs.readFile = Deno.readFile;
+    fs.chmod = Deno.chmod;
+    fs.chown = Deno.chown;
+    fs.cwd = Deno.cwd;
+    fs.makeTempDir = Deno.makeTempDir;
+    fs.makeTempFile = Deno.makeTempFile;
+    fs.mkdir = Deno.mkdir;
+    fs.chdir = Deno.chdir;
+    fs.copyFile = Deno.copyFile;
+    fs.readDir = Deno.readDir;
+    fs.readLink = Deno.readLink;
+    fs.realPath = Deno.realPath;
+    fs.remove = Deno.remove;
+    fs.rename = Deno.rename;
+    fs.stat = Deno.stat;
+    fs.lstat = Deno.lstat;
+    fs.truncate = Deno.truncate;
+    fs.FsFile = Deno.FsFile;
+    fs.open = Deno.open;
+    fs.create = Deno.create;
+    fs.symlink = Deno.symlink;
+    fs.link = Deno.link;
+    fs.utime = Deno.utime;
+    fs.umask = Deno.umask;
+})(fs || (fs = {}));
 /// HTTP status codes.
 ///
 // source: https://github.com/prettymuchbryce/http-status-codes/blob/master/src/status-codes.ts
@@ -369,8 +400,8 @@ export class HttpError extends Error {
 export function stringHandler(f) {
     return async (req) => {
         try {
-            let body = req.body;
-            let resp = await f({
+            const body = req.body;
+            const resp = await f({
                 uri: req.uri,
                 params: req.params,
                 headers: req.headers,
@@ -407,8 +438,8 @@ export function stringHandler(f) {
 export function htmlHandler(f) {
     return async (req) => {
         try {
-            let body = req.body;
-            let resp = await f({
+            const body = req.body;
+            const resp = await f({
                 uri: req.uri,
                 params: req.params,
                 headers: req.headers,
@@ -446,8 +477,8 @@ export function htmlHandler(f) {
 export function jsonHandler(f) {
     return async (req) => {
         try {
-            let body = req.body;
-            let resp = await f({
+            const body = req.body;
+            const resp = await f({
                 uri: req.uri,
                 params: req.params,
                 headers: req.headers,

@@ -402,7 +402,7 @@ addRoute(
 
 addRoute(
   "GET",
-  "/api/pizzas/:id",
+  "/api/pizzas/{id}",
   jsonHandler(async (req) => {
     const pizzaId = req.params.id;
 
@@ -461,7 +461,7 @@ addRoute(
 
 addRoute(
   "POST",
-  "/api/pizzas/:id/vote",
+  "/api/pizzas/{id}/vote",
   jsonHandler(async (req) => {
     const pizzaId = req.params.id;
 
