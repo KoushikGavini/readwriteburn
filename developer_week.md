@@ -392,30 +392,8 @@ docker run --platform linux/amd64 \
 3. Connect your MetaMask wallet.
 4. Test token burn transactions (both submission and voting flows).
 
-### Testing Strategy
-- Frontend component testing.
-- API endpoint testing.
-- Full transaction flow testing.
-- Thorough verification of error handling and recovery procedures.
-
 ---
 
-## Deployment Architecture
-
-### Production Considerations
-1. Configure environment variables appropriately.
-2. Set proper CORS settings.
-3. Implement SSL/TLS for secure communication.
-4. Schedule regular database backups.
-5. Monitor real-time transaction activity.
-
-### Scaling Strategy
-- Frontend deployed via static hosting.
-- Backend containerized for scalable deployments.
-- Optimized database queries and indices.
-- Transaction queue management for handling high throughput.
-
----
 
 ## Error Handling
 

@@ -14,8 +14,8 @@ A lightweight application that allows users to connect their wallet, check their
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/GalaChain/examples.git
-   cd examples/dapp-template
+   git clone https://github.com/KoushikGavini/readwriteburn.git
+   cd readwriteburn
    ```
 
 2. Install dependencies:
@@ -53,8 +53,12 @@ Trailbase supports TypeScript based scripting for custom API routes, which we us
 Using Docker:
 
 ```bash
-alias trail="docker run -p 4000:4000 --mount type=bind,source=$PWD/traildepot,target=/app/traildepot trailbase/trailbase /app/trail"
-trail run --dev
+docker run --platform linux/amd64 \
+  -p 4000:4000 \
+  -p 4001:4001 \
+  --mount type=bind,source="$(pwd)"/traildepot,target=/app/traildepot \
+  trailbase/trailbase \
+  /app/trail run --dev --address "0.0.0.0:4000" --admin-address "0.0.0.0:4001"
 ```
 
 Or [download a pre-built binary](https://github.com/trailbaseio/trailbase/releases/) for your architecture locally to the project root and run 
@@ -69,9 +73,9 @@ When trailbase start for the first time, it will create a new sqlite database, r
 
 Look for the username/password of the new admin user in the log output - you will need these details to login to the admin UI. 
 
-Open [http://127.0.0.1:4000/_/admin](http://127.0.0.1:4000/_/admin) in a web browser to access the trailbase administrative user interface. Login with the credentials created on inital startup. 
+Open [http://127.0.0.1:4001/_/admin](http://127.0.0.1:4001/_/admin) in a web browser to access the trailbase administrative user interface. Login with the credentials created on inital startup. 
 
-Click the pen and paper icon in the left hand side bar to access the [SQL Editor](http://127.0.0.1:4000/_/admin/editor). Review each of the .sql files in resources and paste them into the editor to execute SQL to populate initial tables.
+Click the pen and paper icon in the left hand side bar to access the [SQL Editor](http://127.0.0.1:4001/_/admin/editor). Review each of the .sql files in resources and paste them into the editor to execute SQL to populate initial tables.
 
 If you try to add these files directly to the database using `sqlite3 traildepot/data/main.db < resources/{data insert file}.sql`, you may receive an error `unknown function: is_uuid_v7()`. This is an application-defined sqlite function used by trailbase that is not available in a standard, compiled version. Use the editor in the admin UI in order to run the SQL statements through trailbase's application layer and you won't have this problem. 
 
