@@ -83,7 +83,67 @@ flowchart TB
     class AE,TB,APILayer api
     class BG,BurnServices burn
 ```
-
+```mermaid
+graph TB
+    %% User Interface
+    User((User/Browser))
+    
+    %% Frontend Layer
+    subgraph Frontend["Frontend - Vue 3 (Port 3001)"]
+        App["App.vue
+        Wallet Connection + Routing"]
+        
+        subgraph Views["Key Views"]
+            PizzaList["ListByVotes.vue
+            Vote + Display"]
+            PizzaSubmit["NewPizzaSubmit.vue
+            Create + Burn"]
+            Account["Account.vue
+            Wallet + Balance"]
+        end
+    end
+    
+    %% Backend Layer
+    subgraph Backend["TrailBase Backend (Port 4000)"]
+        API["REST API
+        /api/pizzas
+        /api/pizza-menu"]
+        
+        Security["Security Layer
+        XSS + SQL Protection"]
+        
+        DB[(SQLite DB
+        UUID v7 Keys)]
+    end
+    
+    %% External Services
+    subgraph Chain["Blockchain Layer"]
+        MetaMask["MetaMask
+        Wallet + Signing"]
+        
+        GalaBurn["GalaChain
+        Burn Gateway"]
+    end
+    
+    %% Flow Connections
+    User --> Frontend
+    App --> Views
+    Views --> API
+    API --> Security
+    Security --> DB
+    Views --> MetaMask
+    MetaMask --> GalaBurn
+    API --> GalaBurn
+    
+    %% Styling
+    classDef vue fill:#42b883,stroke:#35495e,color:white
+    classDef backend fill:#ff9999,stroke:#cc0000,color:black
+    classDef chain fill:#6b9bff,stroke:#2a4c92,color:white
+    
+    class Frontend,App,Views,PizzaList,PizzaSubmit,Account vue
+    class Backend,API,Security,DB backend
+    class Chain,MetaMask,GalaBurn chain
+```
 #### Key Components
 - **MetamaskConnectClient**: Manages wallet connectivity and transaction signing.
   ```typescript
